@@ -1,4 +1,4 @@
-package org.example.modelo;
+package org.campominado.com.modelo;
 
 public class Tabuleiro {
 
