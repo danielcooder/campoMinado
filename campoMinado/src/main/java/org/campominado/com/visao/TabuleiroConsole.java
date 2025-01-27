@@ -3,7 +3,7 @@ import org.campominado.com.excecao.ExplosaoException;
 import org.campominado.com.excecao.SairException;
 import org.campominado.com.modelo.Tabuleiro;
 
-import java.lang.reflect.Array;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class TabuleiroConsole {
 
-    private Tabuleiro tabuleiro;
-    private Scanner entrada = new Scanner(System.in);
+    private final Tabuleiro tabuleiro;
+    private final Scanner entrada = new Scanner(System.in);
 
     public TabuleiroConsole(Tabuleiro tabuleiro) {
         this.tabuleiro = tabuleiro;
@@ -27,7 +27,7 @@ public class TabuleiroConsole {
 
                 cicloDoJogo();
 
-                System.out.println("Outra partida? (S/n");
+                System.out.println("Outra partida? (S/n)");
                 String resposta = entrada.nextLine();
 
                 if ("n".equalsIgnoreCase(resposta)) {
@@ -45,15 +45,16 @@ public class TabuleiroConsole {
 
     }
 
-    private String cicloDoJogo() {
+    private void cicloDoJogo() {
         try {
             while (!tabuleiro.objetivoAlcancado()) {
                 System.out.println(tabuleiro);
 
                 String digitado = capturarValorDigitado("Digite (x , y): ");
 
-                Iterator<Integer> xy = Arrays.stream(digitado.split(" , "))
+                Iterator<Integer> xy = Arrays.stream(digitado.split(","))
                         .map(e -> Integer.parseInt(e.trim())).iterator();
+
 
                 digitado = capturarValorDigitado("1 - Abrir ou 2 - (Des)Marcar: ");
 
@@ -64,13 +65,12 @@ public class TabuleiroConsole {
                 }
 
             }
-
+            System.out.println(tabuleiro);
             System.out.println("Você ganhou!  ##PARABÉNS##");
         } catch (ExplosaoException e) {
+            System.out.println(tabuleiro);
             System.out.println("Você perdeu!");
-            tabuleiro.reiniciar();
         }
-        return null;
     }
 
     private String capturarValorDigitado(String texto) {
