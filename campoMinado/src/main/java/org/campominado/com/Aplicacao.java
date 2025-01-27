@@ -1,6 +1,7 @@
 package org.campominado.com;
 
 import org.campominado.com.modelo.Tabuleiro;
+import org.campominado.com.visao.TabuleiroConsole;
 
 public class Aplicacao {
 
@@ -8,12 +9,7 @@ public class Aplicacao {
 
         Tabuleiro tabuleiro = new Tabuleiro(6 , 6, 6);
 
-        tabuleiro.abrir(3, 3);
-        tabuleiro.alternarMarcacao(4,4);
-
-
-        System.out.println(tabuleiro);
-
+        new TabuleiroConsole(tabuleiro);
 
     }
 
